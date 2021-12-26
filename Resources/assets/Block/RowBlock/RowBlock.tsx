@@ -4,15 +4,15 @@
 
 import React from 'react';
 import Row from "antd/lib/row";
-import StyleHelper from "@EveryWorkflow/CoreBundle/Helper/StyleHelper";
+import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import RenderBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/RenderBlockComponent";
 import RowBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/RowBlockInterface";
 import AddBlockInPageComponent from "@EveryWorkflow/PageBuilderBundle/Component/AddBlockInPageComponent";
-import {MODE_EDIT} from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import { MODE_EDIT } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
 import DropBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/DropBlockComponent";
-import {DROP_TYPE_VERTICAL} from "@EveryWorkflow/PageBuilderBundle/Component/DropBlockComponent/DropBlockComponent";
-import {DROP_TYPE_INSIDE} from "@EveryWorkflow/PageBuilderBundle/Action/DropBlockAction";
+import { DROP_TYPE_VERTICAL } from "@EveryWorkflow/PageBuilderBundle/Component/DropBlockComponent/DropBlockComponent";
+import { DROP_TYPE_INSIDE } from "@EveryWorkflow/PageBuilderBundle/Action/DropBlockAction";
 
 interface RowBlockProps {
     indexes?: Array<number>;
@@ -20,7 +20,7 @@ interface RowBlockProps {
     mode?: string;
 }
 
-const RowBlock = ({indexes, blockData, mode}: RowBlockProps) => {
+const RowBlock = ({ indexes, blockData, mode }: RowBlockProps) => {
     const renderBlockContent = () => (
         <Row
             className={blockData.class_name}
@@ -32,11 +32,11 @@ const RowBlock = ({indexes, blockData, mode}: RowBlockProps) => {
             {blockData.block_data?.map((block, index) => (
                 <React.Fragment key={index}>
                     {mode === MODE_EDIT && (
-                        <DropBlockComponent indexes={[...indexes ?? [],  ...[index]]} type={DROP_TYPE_VERTICAL}/>
+                        <DropBlockComponent indexes={[...indexes ?? [], ...[index]]} type={DROP_TYPE_VERTICAL} />
                     )}
-                    <RenderBlockComponent indexes={[...indexes ?? [],  ...[index]]} blockData={block} mode={mode}/>
+                    <RenderBlockComponent indexes={[...indexes ?? [], ...[index]]} blockData={block} mode={mode} />
                     {(mode === MODE_EDIT && blockData.block_data?.length === (index + 1)) && (
-                        <DropBlockComponent indexes={indexes} type={DROP_TYPE_VERTICAL} dropType={DROP_TYPE_INSIDE}/>
+                        <DropBlockComponent indexes={indexes} type={DROP_TYPE_VERTICAL} dropType={DROP_TYPE_INSIDE} />
                     )}
                 </React.Fragment>
             ))}

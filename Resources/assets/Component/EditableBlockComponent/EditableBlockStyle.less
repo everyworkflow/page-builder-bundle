@@ -24,12 +24,14 @@
     font-size: 11px;
     cursor: move;
     text-transform: capitalize;
-    z-index: 3;
-  }
+    z-index: 1;
 
-  .page-builder-block-title.drag-able:hover,
-  .page-builder-block-title.drag-able:focus {
-    z-index: 100;
+    &.drag-able {
+      &:hover,
+      &:focus {
+        z-index: 100;
+      }
+    }
   }
 
   .page-builder-block-actions {
@@ -39,6 +41,10 @@
     display: none;
     padding: 16px 8px;
     z-index: 1;
+
+    &:hover {
+      z-index: 100;
+    }
 
     .addition-item {
       display: none;

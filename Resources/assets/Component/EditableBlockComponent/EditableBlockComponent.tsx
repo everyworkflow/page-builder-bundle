@@ -2,20 +2,20 @@
  * @copyright EveryWorkflow. All rights reserved.
  */
 
-import React, {lazy, useCallback, useContext, useState} from "react";
+import React, { useRef, lazy, useCallback, useContext, useState } from "react";
 import Tooltip from "antd/lib/tooltip";
 import Button from "antd/lib/button";
 import Form from "antd/lib/form";
 import Space from "antd/lib/space";
-import {CopyOutlined, DeleteOutlined, ToolOutlined} from "@ant-design/icons";
+import { CopyOutlined, DeleteOutlined, ToolOutlined } from "@ant-design/icons";
 import PageBuilderContext from "@EveryWorkflow/PageBuilderBundle/Context/PageBuilderContext";
-import {MODE_VIEW} from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import { MODE_VIEW } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
 import BlockFormInterface from "@EveryWorkflow/PageBuilderBundle/Model/BlockFormInterface";
 import DataFormInterface from "@EveryWorkflow/DataFormBundle/Model/DataFormInterface";
-import Remote from "@EveryWorkflow/CoreBundle/Service/Remote";
-import SidePanelComponent from "@EveryWorkflow/CoreBundle/Component/SidePanelComponent";
-import {PANEL_SIZE_MEDIUM} from "@EveryWorkflow/CoreBundle/Component/SidePanelComponent/SidePanelComponent";
-import {FORM_TYPE_VERTICAL} from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent/DataFormComponent";
+import Remote from "@EveryWorkflow/PanelBundle/Service/Remote";
+import SidePanelComponent from "@EveryWorkflow/PanelBundle/Component/SidePanelComponent";
+import { PANEL_SIZE_MEDIUM } from "@EveryWorkflow/PanelBundle/Component/SidePanelComponent/SidePanelComponent";
+import { FORM_TYPE_VERTICAL } from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent/DataFormComponent";
 import BlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/BlockInterface";
 import AbstractFieldInterface from "@EveryWorkflow/DataFormBundle/Model/Field/AbstractFieldInterface";
 import UpdateBlockDataAction from "@EveryWorkflow/PageBuilderBundle/Action/UpdateBlockDataAction";
@@ -25,7 +25,7 @@ import {
     ACTION_SET_BLOCK_DRAGGING
 } from "@EveryWorkflow/PageBuilderBundle/Reducer/PageBuilderReducer";
 import DeleteBlockAction from "@EveryWorkflow/PageBuilderBundle/Action/DeleteBlockAction";
-import {useDrag} from "ahooks";
+import { useDrag } from "ahooks";
 import DuplicateBlockAction from "@EveryWorkflow/PageBuilderBundle/Action/DuplicateBlockAction";
 
 const DataFormComponent = lazy(() => import("@EveryWorkflow/DataFormBundle/Component/DataFormComponent"));
@@ -38,16 +38,18 @@ interface EditableBlockComponentProps {
 
 const PANEL_TYPE_EDIT = 'edit';
 
-const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockComponentProps) => {
-    const {state: builderState, dispatch: builderDispatch} = useContext(PageBuilderContext);
+const EditableBlockComponent = ({ indexes, blockData, children }: EditableBlockComponentProps) => {
+    const { state: builderState, dispatch: builderDispatch } = useContext(PageBuilderContext);
     const [panelType, setPanelType] = useState<string | undefined>(undefined);
     const [editForm] = Form.useForm();
-    const getDragProps = useDrag({
-        onDragStart: (data) => {
-            builderDispatch({type: ACTION_SET_BLOCK_DRAGGING, payload: data})
+    const dragRef = useRef<HTMLDivElement>(null);
+
+    useDrag(indexes, dragRef, {
+        onDragStart: () => {
+            builderDispatch({ type: ACTION_SET_BLOCK_DRAGGING, payload: indexes })
         },
         onDragEnd: () => {
-            builderDispatch({type: ACTION_SET_BLOCK_DRAGGING, payload: undefined})
+            builderDispatch({ type: ACTION_SET_BLOCK_DRAGGING, payload: undefined })
         },
     });
 
@@ -63,7 +65,6 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
 
     const getDataForm = useCallback((): DataFormInterface => {
         const block = getBlockFormData();
-        console.log('block--->', block);
         let form: DataFormInterface = {
             fields: [],
         };
@@ -74,6 +75,8 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
         form.fields.map((item: AbstractFieldInterface) => {
             if (item.name && currentBlockData.hasOwnProperty(item.name)) {
                 item.value = currentBlockData[item.name];
+            } else {
+                item.value = undefined;
             }
         });
         return form;
@@ -85,7 +88,7 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
         });
         if (blockForm === undefined) {
             const res = await Remote.get(`/page-builder/block-form/${blockData.block_type}`);
-            await builderDispatch({type: ACTION_ADD_BLOCK_FORM_DATA, payload: res});
+            await builderDispatch({ type: ACTION_ADD_BLOCK_FORM_DATA, payload: res });
         }
         setPanelType(PANEL_TYPE_EDIT);
     }
@@ -105,7 +108,7 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
 
     return (
         <div className="page-builder-debug-box">
-            <span className="page-builder-block-title drag-able" {...getDragProps(indexes)}>
+            <span ref={dragRef} className="page-builder-block-title drag-able">
                 {blockData?.block_type.split('_').join(' ')}
             </span>
             {blockData.block_type !== 'abstract_block' && (
@@ -115,7 +118,7 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
                             type="primary"
                             shape="circle"
                             size="small"
-                            icon={<DeleteOutlined/>}
+                            icon={<DeleteOutlined />}
                             onClick={() => {
                                 DeleteBlockAction(indexes ?? [])(builderState, builderDispatch);
                             }}
@@ -127,7 +130,7 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
                             type="primary"
                             shape="circle"
                             size="small"
-                            icon={<CopyOutlined/>}
+                            icon={<CopyOutlined />}
                             onClick={onDuplicateClickHandle}
                         />
                     </Tooltip>
@@ -138,7 +141,7 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
                             type="primary"
                             shape="circle"
                             size="small"
-                            icon={<ToolOutlined className="flip-icon"/>}
+                            icon={<ToolOutlined className="flip-icon" />}
                             onClick={onEditClickHandle}
                         />
                     </Tooltip>
@@ -165,13 +168,14 @@ const EditableBlockComponent = ({indexes, blockData, children}: EditableBlockCom
                                 }}>Reset</Button>
                         </Space>
                     )}
-                    footerStyle={{textAlign: 'center'}}
+                    footerStyle={{ textAlign: 'center' }}
                 >
                     <DataFormComponent
                         form={editForm}
                         formData={getDataForm()}
                         formType={FORM_TYPE_VERTICAL}
                         onSubmit={onEditSubmit}
+                    // initialValues={blockData}
                     />
                 </SidePanelComponent>
             )}

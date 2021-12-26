@@ -3,11 +3,11 @@
  */
 
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import StyleHelper from "@EveryWorkflow/CoreBundle/Helper/StyleHelper";
+import { NavLink } from 'react-router-dom';
+import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import ButtonBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/ButtonBlockInterface";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
-import {MODE_EDIT} from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import { MODE_EDIT } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
 import Button from "antd/lib/button";
 
 interface ButtonBlockProps {
@@ -16,7 +16,7 @@ interface ButtonBlockProps {
     mode?: string;
 }
 
-const ButtonBlock = ({indexes, blockData, mode}: ButtonBlockProps) => {
+const ButtonBlock = ({ indexes, blockData, mode }: ButtonBlockProps) => {
     const renderBlockContent = () => (
         <Button
             className={blockData.class_name}

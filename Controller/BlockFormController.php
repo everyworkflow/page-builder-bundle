@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace EveryWorkflow\PageBuilderBundle\Controller\PageBuilder;
+namespace EveryWorkflow\PageBuilderBundle\Controller;
 
+use EveryWorkflow\CoreBundle\Annotation\EwRoute;
 use EveryWorkflow\PageBuilderBundle\Factory\BlockFormFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
 
 class BlockFormController extends AbstractController
 {
@@ -22,13 +22,19 @@ class BlockFormController extends AbstractController
         $this->blockFormFactory = $blockFormFactory;
     }
 
-    /**
-     * @Route(
-     *     path="api/page-builder/block-form/{blockType}",
-     *     name="api.page_builder.block_form.block_type",
-     *     methods="GET"
-     * )
-     */
+    #[EwRoute(
+        path: "page-builder/block-form/{blockType}",
+        name: 'page_builder.block_form.block_type',
+        methods: 'GET',
+        swagger: [
+            'parameters' => [
+                [
+                    'name' => 'blockType',
+                    'in' => 'path',
+                ]
+            ]
+        ]
+    )]
     public function __invoke($blockType): JsonResponse
     {
         $form = $this->blockFormFactory->createFormForBlockType($blockType);
@@ -37,6 +43,6 @@ class BlockFormController extends AbstractController
             'block_type' => $blockType,
             'data_form' => $form->toArray(),
         ];
-        return (new JsonResponse())->setData($data);
+        return new JsonResponse($data);
     }
 }

@@ -5,7 +5,7 @@
 import React from 'react';
 import Typography from "antd/lib/typography";
 import Markdown from "markdown-to-jsx";
-import StyleHelper from "@EveryWorkflow/CoreBundle/Helper/StyleHelper";
+import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import ParagraphBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/ParagraphBlockInterface";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
 import "@EveryWorkflow/PageBuilderBundle/Block/MarkdownBlock/MarkdownStyle.less";
@@ -20,21 +20,21 @@ interface WithChildren {
     children?: React.ReactNode
 }
 
-const MarkdownBlock = ({indexes, blockData}: ParagraphBlockProps) => {
+const MarkdownBlock = ({ indexes, blockData }: ParagraphBlockProps) => {
 
-    const OlWrapRenderComponent = ({children}: WithChildren): React.ReactElement => (
+    const OlWrapRenderComponent = ({ children }: WithChildren): React.ReactElement => (
         <Typography.Paragraph>
             <ol>{children}</ol>
         </Typography.Paragraph>
     )
 
-    const UlWrapRenderComponent = ({children}: WithChildren): React.ReactElement => (
+    const UlWrapRenderComponent = ({ children }: WithChildren): React.ReactElement => (
         <Typography.Paragraph>
             <ul>{children}</ul>
         </Typography.Paragraph>
     )
 
-    const PreWrapRenderComponent = ({children}: WithChildren): React.ReactElement => (
+    const PreWrapRenderComponent = ({ children }: WithChildren): React.ReactElement => (
         <Typography.Paragraph>
             <pre>{children}</pre>
         </Typography.Paragraph>

@@ -4,11 +4,11 @@
 
 import React from 'react';
 import Image from "antd/lib/image";
-import StyleHelper from "@EveryWorkflow/CoreBundle/Helper/StyleHelper";
+import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import ImageBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/ImageBlockInterface";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
-import {MODE_EDIT} from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
-import UrlHelper from '@EveryWorkflow/CoreBundle/Helper/UrlHelper';
+import { MODE_EDIT } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import UrlHelper from '@EveryWorkflow/PanelBundle/Helper/UrlHelper';
 
 interface ImageBlockProps {
     indexes?: Array<number>;
@@ -16,7 +16,7 @@ interface ImageBlockProps {
     mode?: string;
 }
 
-const ImageBlock = ({indexes, blockData, mode}: ImageBlockProps) => {
+const ImageBlock = ({ indexes, blockData, mode }: ImageBlockProps) => {
     const renderBlockContent = () => (
         <Image
             className={blockData.class_name}

@@ -2,12 +2,12 @@
  * @copyright EveryWorkflow. All rights reserved.
  */
 
-import React, {useCallback, useContext} from 'react';
-import {useDrop} from "ahooks";
+import React, { useRef, useCallback, useContext, useState } from 'react';
+import { useDrop } from "ahooks";
 import PageBuilderContext from "@EveryWorkflow/PageBuilderBundle/Context/PageBuilderContext";
 import "@EveryWorkflow/PageBuilderBundle/Component/DropBlockComponent/DropBlockStyle.less";
 import classNames from "classnames";
-import DropBlockAction, {DROP_TYPE_BEFORE} from "@EveryWorkflow/PageBuilderBundle/Action/DropBlockAction";
+import DropBlockAction, { DROP_TYPE_BEFORE } from "@EveryWorkflow/PageBuilderBundle/Action/DropBlockAction";
 
 export const DROP_TYPE_VERTICAL = 'vertical';
 export const DROP_TYPE_HORIZONTAL = 'horizontal'; // default
@@ -19,13 +19,15 @@ interface DropBlockComponentProps {
 }
 
 const DropBlockComponent = ({
-                                indexes,
-                                type = DROP_TYPE_HORIZONTAL,
-                                dropType = DROP_TYPE_BEFORE
-                            }: DropBlockComponentProps) => {
-    const {state: builderState, dispatch: builderDispatch} = useContext(PageBuilderContext);
+    indexes,
+    type = DROP_TYPE_HORIZONTAL,
+    dropType = DROP_TYPE_BEFORE
+}: DropBlockComponentProps) => {
+    const { state: builderState, dispatch: builderDispatch } = useContext(PageBuilderContext);
+    const [isHovering, setIsHovering] = useState(false);
+    const dropRef = useRef<HTMLDivElement>(null);
 
-    const [dragTargetProps, {isHovering: isDragTargetHovering}] = useDrop({
+    useDrop(dropRef, {
         onDom: (content: Array<number>, e: any) => {
             if (Array.isArray(content) && content.length) {
                 DropBlockAction({
@@ -35,6 +37,8 @@ const DropBlockComponent = ({
                 })(builderState, builderDispatch);
             }
         },
+        onDragEnter: () => setIsHovering(true),
+        onDragLeave: () => setIsHovering(false),
     });
 
     const isDropBoxEnable = useCallback((): boolean => {
@@ -60,13 +64,13 @@ const DropBlockComponent = ({
             {isDropBoxEnable() && (
                 <>
                     <div
-                        {...dragTargetProps}
-                        className={classNames('dropbox', type === DROP_TYPE_VERTICAL ? 'vertical' : '')}/>
+                        ref={dropRef}
+                        className={classNames('dropbox', type === DROP_TYPE_VERTICAL ? 'vertical' : '')} />
                     <div className={classNames('dropbox-content', type === DROP_TYPE_VERTICAL ? 'vertical' : '')}>
-                        <div style={{textAlign: 'center'}}>
+                        <div style={{ textAlign: 'center' }}>
                             <span
                                 className={classNames('dropbox-content-text', type === DROP_TYPE_VERTICAL ? 'vertical' : '')}>
-                                {isDragTargetHovering ? 'Drop here' : 'Drag block here'}
+                                {isHovering ? 'Drop here' : 'Drag block here'}
                             </span>
                         </div>
                     </div>

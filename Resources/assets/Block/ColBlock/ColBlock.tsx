@@ -4,12 +4,12 @@
 
 import React from 'react';
 import Col from "antd/lib/col";
-import StyleHelper from "@EveryWorkflow/CoreBundle/Helper/StyleHelper";
+import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import RenderBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/RenderBlockComponent";
 import ColBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/ColBlockInterface";
 import AddBlockInPageComponent from "@EveryWorkflow/PageBuilderBundle/Component/AddBlockInPageComponent";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
-import {MODE_EDIT} from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import { MODE_EDIT } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
 import DropBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/DropBlockComponent";
 
 interface ColBlockProps {
@@ -18,15 +18,15 @@ interface ColBlockProps {
     mode?: string;
 }
 
-const ColBlock = ({indexes, blockData, mode}: ColBlockProps) => {
+const ColBlock = ({ indexes, blockData, mode }: ColBlockProps) => {
     const renderBlockContent = () => (
         <>
             {blockData.block_data?.map((block, index) => (
                 <React.Fragment key={index}>
                     {mode === MODE_EDIT && (
-                        <DropBlockComponent indexes={[...indexes ?? [], ...[index]]}/>
+                        <DropBlockComponent indexes={[...indexes ?? [], ...[index]]} />
                     )}
-                    <RenderBlockComponent indexes={[...indexes ?? [], ...[index]]} blockData={block} mode={mode}/>
+                    <RenderBlockComponent indexes={[...indexes ?? [], ...[index]]} blockData={block} mode={mode} />
                 </React.Fragment>
             ))}
         </>

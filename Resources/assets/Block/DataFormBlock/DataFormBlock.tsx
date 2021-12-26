@@ -5,12 +5,12 @@
 import React from 'react';
 import Form from "antd/lib/form";
 import Button from "antd/lib/button";
-import StyleHelper from "@EveryWorkflow/CoreBundle/Helper/StyleHelper";
+import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import DataFormBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/DataFormBlockInterface";
-import {FORM_TYPE_HORIZONTAL} from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent/DataFormComponent";
+import { FORM_TYPE_HORIZONTAL } from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent/DataFormComponent";
 import DataFormComponent from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
-import {MODE_EDIT} from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import { MODE_EDIT } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
 
 interface DataFormBlockProps {
     indexes?: Array<number>;
@@ -18,7 +18,7 @@ interface DataFormBlockProps {
     mode?: string;
 }
 
-const DataFormBlock = ({indexes, blockData, mode}: DataFormBlockProps) => {
+const DataFormBlock = ({ indexes, blockData, mode }: DataFormBlockProps) => {
     const [form] = Form.useForm();
 
     const onSubmit = (data: any) => {

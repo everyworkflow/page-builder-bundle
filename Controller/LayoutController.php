@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace EveryWorkflow\PageBuilderBundle\Controller;
 
-use EveryWorkflow\CoreBundle\Annotation\EWFRoute;
+use EveryWorkflow\CoreBundle\Annotation\EwRoute;
 use EveryWorkflow\PageBuilderBundle\Component\PageFooterComponent;
 use EveryWorkflow\PageBuilderBundle\Component\PageHeaderComponent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,23 +16,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LayoutController extends AbstractController
 {
-    /**
-     * @EWFRoute (
-     *     api_path="page_builder/layout",
-     *     name="api_page_builder_layout",
-     *     methods="GET"
-     * )
-     */
+    #[EwRoute(
+        path: "page-builder/layout",
+        name: 'page_builder.layout',
+        methods: 'GET',
+        swagger: true
+    )]
     public function __invoke(
         PageHeaderComponent $pageHeaderComponent,
         PageFooterComponent $pageFooterComponent
     ): JsonResponse {
-        $jsonResponse = new JsonResponse();
         $data = [
             'page_header' => $pageHeaderComponent->getData(),
             'page_footer' => $pageFooterComponent->getData(),
         ];
-        $jsonResponse->setData($data)->setStatusCode(JsonResponse::HTTP_OK);
-        return $jsonResponse;
+
+        return new JsonResponse($data);
     }
 }

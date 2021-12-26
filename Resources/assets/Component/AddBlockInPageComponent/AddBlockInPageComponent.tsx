@@ -2,17 +2,17 @@
  * @copyright EveryWorkflow. All rights reserved.
  */
 
-import React, {useContext, useState} from 'react';
-import {PlusOutlined} from "@ant-design/icons";
+import React, { useContext, useState } from 'react';
+import { PlusOutlined } from "@ant-design/icons";
 import Tooltip from "antd/lib/tooltip";
 import Button from "antd/lib/button";
-import SidePanelComponent from "@EveryWorkflow/CoreBundle/Component/SidePanelComponent";
-import {PANEL_SIZE_MEDIUM} from "@EveryWorkflow/CoreBundle/Component/SidePanelComponent/SidePanelComponent";
+import SidePanelComponent from "@EveryWorkflow/PanelBundle/Component/SidePanelComponent";
+import { PANEL_SIZE_MEDIUM } from "@EveryWorkflow/PanelBundle/Component/SidePanelComponent/SidePanelComponent";
 import BlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/BlockInterface";
 import SetBlockDataAction from "@EveryWorkflow/PageBuilderBundle/Action/SetBlockDataAction";
 import PageBuilderContext from "@EveryWorkflow/PageBuilderBundle/Context/PageBuilderContext";
 import DropBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/DropBlockComponent";
-import {DROP_TYPE_INSIDE} from "@EveryWorkflow/PageBuilderBundle/Action/DropBlockAction";
+import { DROP_TYPE_INSIDE } from "@EveryWorkflow/PageBuilderBundle/Action/DropBlockAction";
 
 const PANEL_TYPE_ADD_BLOCK = 'add_block';
 
@@ -35,8 +35,8 @@ const blockList: any = {
     markdown_block: 'Markdown block',
 };
 
-const AddBlockInPageComponent = ({indexes, children}: AddBlockInPageComponentProps) => {
-    const {state: builderState, dispatch: builderDispatch} = useContext(PageBuilderContext);
+const AddBlockInPageComponent = ({ indexes, children }: AddBlockInPageComponentProps) => {
+    const { state: builderState, dispatch: builderDispatch } = useContext(PageBuilderContext);
     const [panelType, setPanelType] = useState<string | undefined>(undefined);
 
     const onInsertBlock = (currentBlock: string) => {
@@ -56,11 +56,11 @@ const AddBlockInPageComponent = ({indexes, children}: AddBlockInPageComponentPro
                     currentArrNodePointer = currentArrNodePointer[val].block_data ?? [];
                 }
             })
-            currentArrNodePointer.push({block_type: currentBlock});
+            currentArrNodePointer.push({ block_type: currentBlock });
             SetBlockDataAction(blockData)(builderDispatch);
         } else {
             const blockData: Array<BlockInterface> = builderState.block_data;
-            blockData.push({block_type: currentBlock});
+            blockData.push({ block_type: currentBlock });
             SetBlockDataAction(blockData)(builderDispatch);
         }
 
@@ -70,13 +70,13 @@ const AddBlockInPageComponent = ({indexes, children}: AddBlockInPageComponentPro
     return (
         <>
             {children}
-            <DropBlockComponent indexes={indexes} dropType={DROP_TYPE_INSIDE}/>
+            <DropBlockComponent indexes={indexes} dropType={DROP_TYPE_INSIDE} />
             <div className="page-builder-add-block-wrapper">
                 <Tooltip title="Add new block" className="btn-add-new-block-wrapper">
                     <Button
                         type="primary"
                         shape="circle"
-                        icon={<PlusOutlined/>}
+                        icon={<PlusOutlined />}
                         onClick={() => {
                             setPanelType(PANEL_TYPE_ADD_BLOCK);
                         }}
@@ -89,7 +89,7 @@ const AddBlockInPageComponent = ({indexes, children}: AddBlockInPageComponentPro
                         onClose={() => {
                             setPanelType(undefined);
                         }}
-                        footerStyle={{textAlign: 'center'}}
+                        footerStyle={{ textAlign: 'center' }}
                     >
                         {Object.keys(blockList).map((key, index) => (
                             <React.Fragment key={index}>

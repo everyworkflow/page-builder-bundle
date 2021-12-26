@@ -2,12 +2,12 @@
  * @copyright EveryWorkflow. All rights reserved.
  */
 
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import Typography from "antd/lib/typography";
-import StyleHelper from "@EveryWorkflow/CoreBundle/Helper/StyleHelper";
+import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import HeadingBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/HeadingBlockInterface";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
-import {MODE_EDIT} from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import { MODE_EDIT } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
 
 interface HeadingBlockProps {
     indexes?: Array<number>;
@@ -15,7 +15,7 @@ interface HeadingBlockProps {
     mode?: string;
 }
 
-const HeadingBlock = ({indexes, blockData, mode}: HeadingBlockProps) => {
+const HeadingBlock = ({ indexes, blockData, mode }: HeadingBlockProps) => {
     const headingLevel: any = {
         h1: 1,
         h2: 2,
