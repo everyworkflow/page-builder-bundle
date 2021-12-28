@@ -40,9 +40,11 @@ class PageHeaderComponent implements ComponentInterface
     {
         return [
             'header_top' => [
-                'company_email' => 'info@ramroprice.com',
+                'company_email' => 'info@everyworkflow.com',
             ],
-            'logo' => $this->imageComponentFactory->create()->setUrl($this->package->getUrl('/media/logo.svg'))->setAlt('Ramro Price')->getData(),
+            'logo' => $this->imageComponentFactory->create()
+                ->setUrl($this->package->getUrl('/media/logo.svg'))
+                ->setAlt('EveryWorkflow')->getData(),
             'main_menu' => $this->mainMenuComponent->getData(),
             'customer' => null,
         ];

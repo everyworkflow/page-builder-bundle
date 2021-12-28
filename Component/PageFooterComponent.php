@@ -25,8 +25,11 @@ class PageFooterComponent implements ComponentInterface
      */
     protected ImageComponentFactory $imageComponentFactory;
 
-    public function __construct(LinkComponentFactory $linkComponentFactory, Package $package, ImageComponentFactory $imageComponentFactory)
-    {
+    public function __construct(
+        LinkComponentFactory $linkComponentFactory,
+        Package $package,
+        ImageComponentFactory $imageComponentFactory
+    ) {
         $this->linkComponentFactory = $linkComponentFactory;
         $this->package = $package;
         $this->imageComponentFactory = $imageComponentFactory;
@@ -35,11 +38,14 @@ class PageFooterComponent implements ComponentInterface
     public function getData(): ?array
     {
         $data = [];
-        $data['footer_logo'] = $this->imageComponentFactory->create()->setUrl($this->package->getUrl('/media/logo.svg'))->setAlt('Ramro Price')->getData();
+        $data['footer_logo'] = $this->imageComponentFactory->create()
+            ->setUrl($this->package->getUrl('/media/logo.svg'))
+            ->setAlt('Every Workflow')
+            ->getData();
         $data['footer_bottom_links'] = $this->getFooterBottomLinks();
         $data['footer_social_links'] = $this->getSocialLinks();
-        $data['copyright'] = '© ' . date('Y') . ' Ramro Price. All rights reserved.';
-        $data['tagline'] = 'A nepali ecommerce prices and compare.';
+        $data['copyright'] = '© ' . date('Y') . ' EveryWorkflow. All rights reserved.';
+        $data['tagline'] = 'Something wonderful';
         return $data;
     }
 

@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "everyworkflow/base-bundle": "dev-main"
+        "everyworkflow/core-bundle": "dev-main",
+        "everyworkflow/data-form-bundle": "dev-main"
     },
     "autoload": {
         "psr-4": {
