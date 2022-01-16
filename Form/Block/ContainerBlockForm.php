@@ -15,13 +15,13 @@ class ContainerBlockForm extends AbstractBlockForm implements ContainerBlockForm
     public function getFields(): array
     {
         $fields = [
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Container type',
                 'name' => 'container_type',
                 'field_type' => 'select_field',
                 'options' => [
                     $this->fieldOptionFactory->create(Option::class, [
-                        'key' => null,
+                        'key' => '',
                         'value' => 'Default',
                     ]),
                     $this->fieldOptionFactory->create(Option::class, [
@@ -34,7 +34,7 @@ class ContainerBlockForm extends AbstractBlockForm implements ContainerBlockForm
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Content JSX style',
                 'name' => 'content_style',
                 'field_type' => 'textarea_field',

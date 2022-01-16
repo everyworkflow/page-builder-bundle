@@ -89,8 +89,7 @@ const AddBlockInPageComponent = ({ indexes, children }: AddBlockInPageComponentP
                         onClose={() => {
                             setPanelType(undefined);
                         }}
-                        footerStyle={{ textAlign: 'center' }}
-                    >
+                        footerStyle={{ textAlign: 'center' }}>
                         {Object.keys(blockList).map((key, index) => (
                             <React.Fragment key={index}>
                                 <Button style={{

@@ -25,9 +25,6 @@ return function (ContainerConfigurator $configurator) {
         ->load('EveryWorkflow\\PageBuilderBundle\\', '../../*')
         ->exclude('../../{DependencyInjection,Resources,Support,Tests}');
 
-    $services->set(PageBuilderConfigProvider::class)
-        ->arg('$configs', '%page_builder%');
-
     $services->set(EmptyVersionStrategy::class);
     $services->set(Package::class)->args([service(EmptyVersionStrategy::class)]);
 };

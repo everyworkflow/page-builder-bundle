@@ -2,7 +2,7 @@
  * @copyright EveryWorkflow. All rights reserved.
  */
 
-import {CSSProperties} from "react";
+import { CSSProperties } from "react";
 
 interface BlockInterface {
     block_type: string;

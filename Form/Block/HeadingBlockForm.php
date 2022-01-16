@@ -15,7 +15,7 @@ class HeadingBlockForm extends AbstractBlockForm implements HeadingBlockFormInte
     public function getFields(): array
     {
         $fields = [
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Heading type',
                 'name' => 'heading_type',
                 'field_type' => 'select_field',
@@ -42,7 +42,7 @@ class HeadingBlockForm extends AbstractBlockForm implements HeadingBlockFormInte
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Content',
                 'name' => 'content',
                 'field_type' => 'text_field',

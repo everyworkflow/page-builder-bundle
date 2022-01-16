@@ -15,13 +15,13 @@ class RowBlockForm extends AbstractBlockForm implements RowBlockFormInterface
     public function getFields(): array
     {
         $fields = [
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Gutter',
                 'name' => 'gutter',
                 'field_type' => 'text_field',
                 'input_type' => 'number',
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Align',
                 'name' => 'align',
                 'field_type' => 'select_field',
@@ -44,7 +44,7 @@ class RowBlockForm extends AbstractBlockForm implements RowBlockFormInterface
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Justify',
                 'name' => 'justify',
                 'field_type' => 'select_field',
@@ -71,7 +71,7 @@ class RowBlockForm extends AbstractBlockForm implements RowBlockFormInterface
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Wrap',
                 'name' => 'wrap',
                 'field_type' => 'switch_field',

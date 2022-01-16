@@ -15,18 +15,18 @@ class LinkWrapperBlockForm extends AbstractBlockForm implements LinkWrapperBlock
     public function getFields(): array
     {
         $fields = [
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Link path',
                 'name' => 'link_path',
                 'field_type' => 'text_field',
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Link target',
                 'name' => 'link_target',
                 'field_type' => 'select_field',
                 'options' => [
                     $this->fieldOptionFactory->create(Option::class, [
-                        'key' => null,
+                        'key' => '',
                         'value' => 'Default',
                     ]),
                     $this->fieldOptionFactory->create(Option::class, [

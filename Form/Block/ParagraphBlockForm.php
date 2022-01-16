@@ -13,7 +13,7 @@ class ParagraphBlockForm extends AbstractBlockForm implements ParagraphBlockForm
     public function getFields(): array
     {
         $fields = [
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Content',
                 'name' => 'content',
                 'field_type' => 'textarea_field',

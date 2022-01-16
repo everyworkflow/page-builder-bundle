@@ -15,23 +15,23 @@ class ButtonBlockForm extends AbstractBlockForm implements ButtonBlockFormInterf
     public function getFields(): array
     {
         $fields = [
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button label',
                 'name' => 'button_label',
                 'field_type' => 'text_field',
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button path',
                 'name' => 'button_path',
                 'field_type' => 'text_field',
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button target',
                 'name' => 'button_target',
                 'field_type' => 'select_field',
                 'options' => [
                     $this->fieldOptionFactory->create(Option::class, [
-                        'key' => null,
+                        'key' => '',
                         'value' => 'Default',
                     ]),
                     $this->fieldOptionFactory->create(Option::class, [
@@ -52,7 +52,7 @@ class ButtonBlockForm extends AbstractBlockForm implements ButtonBlockFormInterf
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button type',
                 'name' => 'button_type',
                 'field_type' => 'select_field',
@@ -83,13 +83,13 @@ class ButtonBlockForm extends AbstractBlockForm implements ButtonBlockFormInterf
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button size',
                 'name' => 'button_size',
                 'field_type' => 'select_field',
                 'options' => [
                     $this->fieldOptionFactory->create(Option::class, [
-                        'key' => null,
+                        'key' => '',
                         'value' => 'Default',
                     ]),
                     $this->fieldOptionFactory->create(Option::class, [
@@ -106,13 +106,13 @@ class ButtonBlockForm extends AbstractBlockForm implements ButtonBlockFormInterf
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button shape',
                 'name' => 'button_shape',
                 'field_type' => 'select_field',
                 'options' => [
                     $this->fieldOptionFactory->create(Option::class, [
-                        'key' => null,
+                        'key' => '',
                         'value' => 'Default',
                     ]),
                     $this->fieldOptionFactory->create(Option::class, [
@@ -125,17 +125,17 @@ class ButtonBlockForm extends AbstractBlockForm implements ButtonBlockFormInterf
                     ]),
                 ],
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button ghost (transparent)',
                 'name' => 'button_ghost',
                 'field_type' => 'switch_field',
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button danger',
                 'name' => 'button_danger',
                 'field_type' => 'switch_field',
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'Button block',
                 'name' => 'button_block',
                 'field_type' => 'switch_field',

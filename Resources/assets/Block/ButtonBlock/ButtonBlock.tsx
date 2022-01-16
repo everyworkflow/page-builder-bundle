@@ -25,8 +25,7 @@ const ButtonBlock = ({ indexes, blockData, mode }: ButtonBlockProps) => {
             block={blockData.button_block}
             danger={blockData.button_danger}
             shape={blockData.button_shape}
-            style={StyleHelper.remoteStyleParse(blockData.style)}
-        >
+            style={StyleHelper.remoteStyleParse(blockData.style)}>
             {blockData.button_path ? (
                 <NavLink to={blockData.button_path} target={blockData.button_target}>{blockData.button_label}</NavLink>
             ) : blockData.button_label}

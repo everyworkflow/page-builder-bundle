@@ -7,10 +7,10 @@ import Form from "antd/lib/form";
 import Button from "antd/lib/button";
 import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import DataFormBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/DataFormBlockInterface";
-import { FORM_TYPE_HORIZONTAL } from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent/DataFormComponent";
 import DataFormComponent from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
 import { MODE_EDIT } from "@EveryWorkflow/PageBuilderBundle/Component/PageBuilderComponent/PageBuilderComponent";
+import { FORM_TYPE_HORIZONTAL } from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent/DataFormComponent";
 
 interface DataFormBlockProps {
     indexes?: Array<number>;

@@ -15,9 +15,7 @@ import DataFormInterface from "@EveryWorkflow/DataFormBundle/Model/DataFormInter
 import Remote from "@EveryWorkflow/PanelBundle/Service/Remote";
 import SidePanelComponent from "@EveryWorkflow/PanelBundle/Component/SidePanelComponent";
 import { PANEL_SIZE_MEDIUM } from "@EveryWorkflow/PanelBundle/Component/SidePanelComponent/SidePanelComponent";
-import { FORM_TYPE_VERTICAL } from "@EveryWorkflow/DataFormBundle/Component/DataFormComponent/DataFormComponent";
 import BlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/BlockInterface";
-import AbstractFieldInterface from "@EveryWorkflow/DataFormBundle/Model/Field/AbstractFieldInterface";
 import UpdateBlockDataAction from "@EveryWorkflow/PageBuilderBundle/Action/UpdateBlockDataAction";
 import "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent/EditableBlockStyle.less";
 import {
@@ -71,14 +69,6 @@ const EditableBlockComponent = ({ indexes, blockData, children }: EditableBlockC
         if (block && block.data_form) {
             form = block.data_form;
         }
-        const currentBlockData: any = blockData;
-        form.fields.map((item: AbstractFieldInterface) => {
-            if (item.name && currentBlockData.hasOwnProperty(item.name)) {
-                item.value = currentBlockData[item.name];
-            } else {
-                item.value = undefined;
-            }
-        });
         return form;
     }, [getBlockFormData]);
 
@@ -168,14 +158,12 @@ const EditableBlockComponent = ({ indexes, blockData, children }: EditableBlockC
                                 }}>Reset</Button>
                         </Space>
                     )}
-                    footerStyle={{ textAlign: 'center' }}
-                >
+                    footerStyle={{ textAlign: 'center' }}>
                     <DataFormComponent
                         form={editForm}
                         formData={getDataForm()}
-                        formType={FORM_TYPE_VERTICAL}
                         onSubmit={onEditSubmit}
-                    // initialValues={blockData}
+                        initialValues={blockData}
                     />
                 </SidePanelComponent>
             )}

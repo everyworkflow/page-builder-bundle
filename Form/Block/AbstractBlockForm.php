@@ -11,6 +11,7 @@ namespace EveryWorkflow\PageBuilderBundle\Form\Block;
 use EveryWorkflow\CoreBundle\Model\DataObjectInterface;
 use EveryWorkflow\DataFormBundle\Factory\FieldOptionFactoryInterface;
 use EveryWorkflow\DataFormBundle\Factory\FormFieldFactoryInterface;
+use EveryWorkflow\DataFormBundle\Factory\FormSectionFactoryInterface;
 use EveryWorkflow\DataFormBundle\Model\Form;
 
 abstract class AbstractBlockForm extends Form implements AbstractBlockFormInterface
@@ -19,10 +20,11 @@ abstract class AbstractBlockForm extends Form implements AbstractBlockFormInterf
 
     public function __construct(
         DataObjectInterface $dataObject,
+        FormSectionFactoryInterface $formSectionFactory,
         FormFieldFactoryInterface $formFieldFactory,
         FieldOptionFactoryInterface $fieldOptionFactory
     ) {
-        parent::__construct($dataObject, $formFieldFactory);
+        parent::__construct($dataObject, $formSectionFactory, $formFieldFactory);
         $this->dataObject->setDataIfNot(self::KEY_PANEL_SIZE, self::PANEL_SIZE_MEDIUM);
         $this->fieldOptionFactory = $fieldOptionFactory;
     }
@@ -41,12 +43,12 @@ abstract class AbstractBlockForm extends Form implements AbstractBlockFormInterf
     public function getFields(): array
     {
         $fields = [
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'CSS classname',
                 'name' => 'classname',
                 'field_type' => 'text_field',
             ]),
-            $this->formFieldFactory->createField([
+            $this->formFieldFactory->create([
                 'label' => 'JSX style',
                 'name' => 'style',
                 'field_type' => 'textarea_field',
