@@ -77,7 +77,7 @@ const EditableBlockComponent = ({ indexes, blockData, children }: EditableBlockC
             return item.block_type === blockData.block_type;
         });
         if (blockForm === undefined) {
-            const res = await Remote.get(`/page-builder/block-form/${blockData.block_type}`);
+            const res = await Remote.get(`/page-builder/block-form/${blockData.block_type}?for=data-form`);
             await builderDispatch({ type: ACTION_ADD_BLOCK_FORM_DATA, payload: res });
         }
         setPanelType(PANEL_TYPE_EDIT);
