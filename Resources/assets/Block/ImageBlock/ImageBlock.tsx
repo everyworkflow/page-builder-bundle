@@ -4,6 +4,7 @@
 
 import React from 'react';
 import Image from "antd/lib/image";
+import {isString} from 'lodash';
 import StyleHelper from "@EveryWorkflow/PanelBundle/Helper/StyleHelper";
 import ImageBlockInterface from "@EveryWorkflow/PageBuilderBundle/Model/Block/ImageBlockInterface";
 import EditableBlockComponent from "@EveryWorkflow/PageBuilderBundle/Component/EditableBlockComponent";
@@ -24,7 +25,7 @@ const ImageBlock = ({ indexes, blockData, mode }: ImageBlockProps) => {
             fallback={blockData.fallback}
             height={blockData.height}
             width={blockData.width}
-            src={UrlHelper.buildImgUrlFromPath(blockData.image?.path_name)}
+            src={UrlHelper.buildImgUrlFromPath(isString(blockData.image) ? blockData.image : (blockData.image?.path_name ?? ''))}
             placeholder={blockData.image?.thumbnail_path}
             preview={blockData.preview === undefined ? false : blockData.preview}
             style={StyleHelper.remoteStyleParse(blockData.style)}
