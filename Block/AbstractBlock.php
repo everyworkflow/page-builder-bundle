@@ -37,16 +37,14 @@ class AbstractBlock implements AbstractBlockInterface
         return $this;
     }
 
-    public function setStyle(array $style): self
+    public function getData(string $key): mixed
     {
-        $this->dataObject->setData(self::KEY_STYLE, $style);
-        return $this;
+        return $this->dataObject->getData($key);
     }
-    
 
-    public function setStyle(array $style): self
+    public function setData(string $key, mixed $val): self
     {
-        $this->dataObject->setData(self::KEY_STYLE, $style);
+        $this->dataObject->setData($key, $val);
         return $this;
     }
 
